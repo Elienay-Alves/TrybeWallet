@@ -1,6 +1,7 @@
 // Coloque aqui suas actions
 export const USER_INFO = 'USER_INFO';
 export const USER_CURRENCY = 'USER_CURRENCY';
+export const USER_EXPENSES = 'USER_EXPENSES';
 
 export function updateUserInfo(payload) {
   return {
@@ -27,4 +28,23 @@ async function awesomeApi() {
 export const thunk = () => async (dispatch) => {
   const API = await awesomeApi();
   dispatch(userCurrency(API));
+};
+
+export function userExpenses(expenses) {
+  return {
+    type: USER_EXPENSES,
+    expenses,
+  };
+}
+
+async function awesomeApiDataSaved() {
+  const URL = 'https://economia.awesomeapi.com.br/json/all';
+  const request = await fetch(URL);
+  const response = await request.json();
+  return response;
+}
+
+export const expensesThunk = () => async (dispatch) => {
+  const API_SAVED = await awesomeApiDataSaved();
+  dispatch(userExpenses(API_SAVED));
 };
