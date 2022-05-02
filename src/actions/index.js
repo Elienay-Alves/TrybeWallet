@@ -2,6 +2,7 @@
 export const USER_INFO = 'USER_INFO';
 export const USER_CURRENCY = 'USER_CURRENCY';
 export const USER_EXPENSES = 'USER_EXPENSES';
+export const DEL_USER_EXPENSE = 'DEL_USER_EXPENSE';
 
 export function updateUserInfo(payload) {
   return {
@@ -48,3 +49,10 @@ export const expensesThunk = () => async (dispatch) => {
   const API_SAVED = await awesomeApiDataSaved();
   dispatch(userExpenses(API_SAVED));
 };
+
+export function delUserExpense(state) {
+  return {
+    type: DEL_USER_EXPENSE,
+    state,
+  };
+}
